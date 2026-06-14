@@ -423,7 +423,6 @@ pre code {
 
 <div class="layout">
 
-<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
 <nav class="sidebar">
   <div class="sidebar-logo">
     <div class="logo-mark">
@@ -472,10 +471,8 @@ pre code {
   </div>
 </nav>
 
-<!-- ═══════════════════ MAIN ═══════════════════ -->
 <main class="main">
 
-  <!-- Hero -->
   <div class="hero">
     <div class="hero-badge">📚 داکیومنت جامع</div>
     <h1>مستندات کامل پلتفرم<br>مدیریت هوشمند محصولات</h1>
@@ -492,7 +489,6 @@ pre code {
     </div>
   </div>
 
-  <!-- ════════════════════════════════════ SECTION 1 ═══ -->
   <section id="overview">
     <h2><span class="section-num">۱</span>معماری کلی پروژه</h2>
 
@@ -550,7 +546,6 @@ pre code {
     </div>
   </section>
 
-  <!-- ════════════════════════════════════ SECTION 2 ═══ -->
   <section id="codebase">
     <h2><span class="section-num">۲</span>آموزش کامل کدبیس</h2>
 
@@ -732,7 +727,6 @@ AccessControlService.get_remaining_quota(store)</pre>
     </section>
   </section>
 
-  <!-- ════════════════════════════════════ SECTION 3 ═══ -->
   <section id="prerequisites">
     <h2><span class="section-num">۳</span>پیش‌نیازهای سیستم</h2>
 
@@ -773,7 +767,6 @@ AccessControlService.get_remaining_quota(store)</pre>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════ SECTION 4 ═══ -->
   <section id="docker-setup">
     <h2><span class="section-num">۴</span>نصب Docker Engine — گام به گام</h2>
 
@@ -819,513 +812,115 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
       <div class="step">
         <div class="step-num">۴</div>
         <div class="step-content">
-          <div class="step-title">اضافه کردن مخزن Docker</div>
+          <div class="step-title">تنظیم Repository برای دریافت داکر</div>
 <pre>echo \
-  "deb [arch="$(dpkg --print-architecture)" \
-  signed-by=/etc/apt/keyrings/docker.gpg] \
-  https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</pre>
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</pre>
         </div>
       </div>
       <div class="step">
         <div class="step-num">۵</div>
         <div class="step-content">
-          <div class="step-title">نصب Docker Engine و Docker Compose</div>
+          <div class="step-title">نصب نهایی Docker Engine</div>
 <pre>sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
-    docker-buildx-plugin docker-compose-plugin</pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۶</div>
-        <div class="step-content">
-          <div class="step-title">اجازه دادن به کاربر جاری بدون sudo</div>
-<pre><span class="comment"># جایگزین کردن $USER با نام کاربری خودتان</span>
-sudo usermod -aG docker $USER
-
-<span class="comment"># خروج و ورود مجدد برای اعمال تغییرات، یا:</span>
-newgrp docker</pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۷</div>
-        <div class="step-content">
-          <div class="step-title">تست نصب</div>
-<pre>docker --version
-docker compose version
-docker run hello-world</pre>
-          <div class="step-desc">اگر پیام <code>Hello from Docker!</code> دیدید، نصب موفق بوده است.</div>
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</pre>
         </div>
       </div>
     </div>
-
-    <h3>نصب روی Windows</h3>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">فعال‌سازی WSL2</div>
-          <div class="step-desc">در PowerShell با دسترسی Administrator اجرا کنید:</div>
-<pre>wsl --install</pre>
-          <div class="step-desc">سپس سیستم را ری‌استارت کنید.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">دانلود و نصب Docker Desktop</div>
-          <div class="step-desc">از آدرس <code>https://www.docker.com/products/docker-desktop/</code> نسخه Windows را دانلود و نصب کنید. در مرحله نصب گزینه <strong>Use WSL2</strong> را انتخاب کنید.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۳</div>
-        <div class="step-content">
-          <div class="step-title">تست در PowerShell</div>
-<pre>docker --version
-docker run hello-world</pre>
-        </div>
-      </div>
-    </div>
-
-    <h3>نصب روی macOS</h3>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">نصب با Homebrew (توصیه شده)</div>
-<pre>brew install --cask docker</pre>
-          <div class="step-desc">یا دانلود مستقیم Docker Desktop از سایت رسمی Docker.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">اجرای Docker Desktop</div>
-          <div class="step-desc">برنامه Docker Desktop را از Applications باز کنید و منتظر بمانید تا آیکون Docker در نوار بالای صفحه سبز شود.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 5 ═══ -->
-  <section id="project-setup">
-    <h2><span class="section-num">۵</span>راه‌اندازی پروژه</h2>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">دریافت کد پروژه</div>
-          <div class="step-desc">اگر Git نصب دارید:</div>
-<pre>git clone https://github.com/YOUR_REPO/saas_platform-gemini.git
-cd saas_platform-gemini</pre>
-          <div class="step-desc" style="margin-top:8px">یا فایل ZIP را دانلود و extract کنید، سپس به پوشه‌اش بروید:</div>
-<pre><span class="comment"># در Linux/Mac</span>
-cd ~/Downloads/saas_platform-gemini
-
-<span class="comment"># در Windows (PowerShell)</span>
-cd C:\Users\YourName\Downloads\saas_platform-gemini</pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">اضافه کردن فایل‌های فونت</div>
-          <div class="step-desc">پروژه از فونت IRANSans استفاده می‌کند. باید پوشه static ایجاد و فونت‌ها را کپی کنید:</div>
-<pre>mkdir -p core/static/fonts
-
-<span class="comment"># فایل IRANSansWeb.ttf را از اینترنت دانلود کرده</span>
-<span class="comment"># و داخل پوشه core/static/fonts/ قرار دهید</span></pre>
-          <div class="step-desc" style="margin-top:8px">فایل فونت باید در مسیر <code>core/static/fonts/IRANSansWeb.ttf</code> باشد.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 6 ═══ -->
-  <section id="env-config">
-    <h2><span class="section-num">۶</span>ساخت فایل تنظیمات محیطی (.env)</h2>
-
-    <div class="alert alert-danger">
-      <div class="alert-icon">🔴</div>
-      <div class="alert-content">
-        <div class="alert-title">فایل .env هرگز نباید در Git باشد!</div>
-        این فایل حاوی رمزهای حساس است. مطمئن شوید که در فایل <code>.gitignore</code> ذکر شده باشد.
-      </div>
-    </div>
-
-    <p>در پوشه اصلی پروژه (کنار docker-compose.yml) یک فایل به نام <code>.env</code> بسازید:</p>
-
-<pre><span class="comment"># Linux / Mac</span>
-touch .env
-nano .env
-
-<span class="comment"># Windows PowerShell</span>
-New-Item .env -ItemType File
-notepad .env</pre>
-
-    <p>محتوای فایل <code>.env</code> را اینگونه بنویسید:</p>
-
-<pre><span class="comment"># ============================================</span>
-<span class="comment"># Django Settings</span>
-<span class="comment"># ============================================</span>
-
-<span class="comment"># یک رشته تصادفی طولانی (مثلا 50 کاراکتر)</span>
-<span class="comment"># می‌توانید با این دستور بسازید:</span>
-<span class="comment"># python3 -c "import secrets; print(secrets.token_hex(32))"</span>
-<span class="string">DJANGO_SECRET_KEY</span>=your-super-secret-key-here-minimum-50-chars
-
-<span class="comment"># آدرس‌های مجاز (در development نیازی به تغییر نیست)</span>
-<span class="string">ALLOWED_HOSTS</span>=localhost,127.0.0.1
-
-<span class="comment"># ============================================</span>
-<span class="comment"># PostgreSQL Database</span>
-<span class="comment"># ============================================</span>
-
-<span class="comment"># این مقادیر باید با docker-compose.yml یکسان باشند</span>
-<span class="string">POSTGRES_DB</span>=saas_db
-<span class="string">POSTGRES_USER</span>=saas_user
-<span class="string">POSTGRES_PASSWORD</span>=saas_password
-<span class="string">POSTGRES_HOST</span>=db
-<span class="string">POSTGRES_PORT</span>=5432</pre>
-
-    <div class="alert alert-info">
-      <div class="alert-icon">💡</div>
-      <div class="alert-content">
-        <div class="alert-title">توضیح POSTGRES_HOST=db</div>
-        وقتی داخل Docker هستیم، سرویس دیتابیس با اسم <code>db</code> شناخته می‌شود (نه localhost). این اسم از docker-compose.yml می‌آید.
-      </div>
-    </div>
-
-    <h3>تولید DJANGO_SECRET_KEY</h3>
-<pre><span class="comment"># روش ۱: با Python</span>
-python3 -c <span class="string">"import secrets; print(secrets.token_hex(32))"</span>
-
-<span class="comment"># روش ۲: با Django shell (اگر Django نصب دارید)</span>
-python3 -c <span class="string">"from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"</span></pre>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 7 ═══ -->
-  <section id="first-run">
-    <h2><span class="section-num">۷</span>اجرای اول پروژه</h2>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">ساخت Docker Images</div>
-          <div class="step-desc">اولین بار این دستور پایتون، کتابخانه‌ها و پیکربندی‌ها را دانلود می‌کند. چند دقیقه طول می‌کشد:</div>
-<pre>docker compose build</pre>
-          <div class="step-desc" style="margin-top:8px">خروجی نرمال مثل این است:</div>
-<pre><span class="comment">[+] Building 45.2s (12/12) FINISHED
- => [internal] load build definition from Dockerfile
- => [web 5/6] RUN pip install -r requirements.txt
- => DONE</span></pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">اجرای سرویس‌ها</div>
-<pre>docker compose up -d</pre>
-          <div class="step-desc">فلگ <code>-d</code> یعنی در پس‌زمینه (detached mode) اجرا شود. بدون این فلگ، خروجی را در ترمینال می‌بینید.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۳</div>
-        <div class="step-content">
-          <div class="step-title">بررسی وضعیت سرویس‌ها</div>
-<pre>docker compose ps</pre>
-          <div class="step-desc">باید چیزی شبیه این ببینید:</div>
-<pre>NAME                   STATUS          PORTS
-saas_platform-db       Up (healthy)    0.0.0.0:54320->5432/tcp
-saas_platform-web      Up              0.0.0.0:8000->8000/tcp</pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۴</div>
-        <div class="step-content">
-          <div class="step-title">اجرای Migration های دیتابیس</div>
-          <div class="step-desc">این دستور جداول دیتابیس را می‌سازد. فقط یک بار (اول کار) نیاز است:</div>
-<pre>docker compose exec web python manage.py migrate</pre>
-          <div class="step-desc" style="margin-top:8px">خروجی موفق:</div>
-<pre><span class="string">Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  ...
-  Applying core.0003_internallink... OK</span></pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۵</div>
-        <div class="step-content">
-          <div class="step-title">ساخت Superuser (ادمین)</div>
-          <div class="step-desc">این کاربر به پنل ادمین دسترسی کامل دارد:</div>
-<pre>docker compose exec web python manage.py createsuperuser</pre>
-          <div class="step-desc" style="margin-top:8px">اطلاعات خواسته شده را وارد کنید:</div>
-<pre><span class="string">Username: admin
-Email address: admin@example.com
-Password: (تایپ می‌شود ولی نمایش داده نمی‌شود)
-Password (again): 
-Superuser created successfully.</span></pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۶</div>
-        <div class="step-content">
-          <div class="step-title">جمع‌آوری فایل‌های استاتیک</div>
-<pre>docker compose exec web python manage.py collectstatic --noinput</pre>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۷</div>
-        <div class="step-content">
-          <div class="step-title">باز کردن مرورگر</div>
-          <div class="step-desc">
-            به آدرس‌های زیر بروید:<br><br>
-            🌐 <strong>پنل ادمین:</strong> <code>http://localhost:8000/admin/</code><br>
-            🌐 <strong>صفحه ورود:</strong> <code>http://localhost:8000/login/</code><br>
-            🌐 <strong>داشبورد:</strong> <code>http://localhost:8000/dashboard/</code>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h3>ساخت اولین فروشگاه (مستاجر)</h3>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">ساخت Feature ها</div>
-          <div class="step-desc">به <code>/admin/core/feature/add/</code> بروید و یک Feature بسازید:<br>
-          Name: <strong>مدیریت قیمت</strong> | Code: <strong>price_manager</strong></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">ساخت Plan</div>
-          <div class="step-desc">به <code>/admin/core/plan/add/</code> بروید:<br>
-          Name: <strong>پایه</strong> | Max Products: <strong>50</strong> | Features: <strong>price_manager ✓</strong></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۳</div>
-        <div class="step-content">
-          <div class="step-title">ساخت Store</div>
-          <div class="step-desc">به <code>/admin/core/store/add/</code> بروید و اطلاعات ووکامرس را وارد کنید:<br>
-          • WooCommerce URL: <code>https://example.com</code><br>
-          • Consumer Key از پنل ووکامرس<br>
-          • Consumer Secret از پنل ووکامرس<br>
-          • WordPress username (برای آپلود تصویر)<br>
-          • WordPress Application Password</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۴</div>
-        <div class="step-content">
-          <div class="step-title">ساخت User و UserProfile</div>
-          <div class="step-desc">در قسمت Users یک کاربر جدید بسازید. سپس به <code>/admin/core/userprofile/add/</code> بروید و کاربر را به فروشگاه وصل کنید.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 8 ═══ -->
-  <section id="production">
-    <h2><span class="section-num">۸</span>آماده‌سازی برای پروداکشن</h2>
-
-    <div class="alert alert-warn">
-      <div class="alert-icon">⚠️</div>
-      <div class="alert-content">
-        <div class="alert-title">حالت فعلی development است!</div>
-        docker-compose.yml فعلی با <code>DJANGO_SETTINGS_MODULE=config.settings.development</code> اجرا می‌شود. برای محیط واقعی باید تغییرات زیر را اعمال کنید.
-      </div>
-    </div>
-
-    <h3>تغییر به حالت Production در docker-compose.yml</h3>
-    <p>فایل <code>docker-compose.yml</code> را باز کنید و بخش کامنت شده را فعال کنید:</p>
-
-<pre><span class="comment"># بخش web را به این تغییر دهید:</span>
-web:
-  build: .
-  restart: always
-  <span class="string">command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3</span>
-  volumes:
-    - .:/app
-    - static_volume:/app/staticfiles
-    - media_volume:/app/media
-  ports:
-    - <span class="string">"8000:8000"</span>
-  env_file:
-    - .env
-  environment:
-    - <span class="string">DJANGO_SETTINGS_MODULE=config.settings.production</span>
-  depends_on:
-    - db</pre>
-
-    <h3>تنظیمات .env برای پروداکشن</h3>
-<pre><span class="string">DJANGO_SECRET_KEY</span>=your-very-long-random-secret-key-here
-<span class="string">ALLOWED_HOSTS</span>=yourdomain.com,www.yourdomain.com
-<span class="string">POSTGRES_DB</span>=saas_db
-<span class="string">POSTGRES_USER</span>=saas_user
-<span class="string">POSTGRES_PASSWORD</span>=a-very-strong-database-password
-<span class="string">POSTGRES_HOST</span>=db
-<span class="string">POSTGRES_PORT</span>=5432</pre>
-
-    <h3>دستورات مهم Docker برای مدیریت روزانه</h3>
-    <table class="doc-table">
-      <thead><tr><th>دستور</th><th>کاربرد</th></tr></thead>
-      <tbody>
-        <tr><td class="mono">docker compose up -d</td><td>شروع تمام سرویس‌ها در پس‌زمینه</td></tr>
-        <tr><td class="mono">docker compose down</td><td>متوقف کردن تمام سرویس‌ها</td></tr>
-        <tr><td class="mono">docker compose down -v</td><td>متوقف کردن و حذف Volume ها (حذف دیتابیس!)</td></tr>
-        <tr><td class="mono">docker compose restart web</td><td>ری‌استارت فقط سرویس web</td></tr>
-        <tr><td class="mono">docker compose logs -f web</td><td>دیدن لاگ‌های زنده سرویس web</td></tr>
-        <tr><td class="mono">docker compose logs -f db</td><td>دیدن لاگ‌های دیتابیس</td></tr>
-        <tr><td class="mono">docker compose exec web bash</td><td>ورود به shell سرویس web</td></tr>
-        <tr><td class="mono">docker compose build --no-cache</td><td>بازسازی image بدون cache (بعد از تغییر requirements)</td></tr>
-        <tr><td class="mono">docker compose exec web python manage.py migrate</td><td>اعمال migration جدید</td></tr>
-        <tr><td class="mono">docker compose exec web python manage.py shell</td><td>باز کردن Django shell برای debug</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 9 ═══ -->
-  <section id="troubleshoot">
-    <h2><span class="section-num">۹</span>رفع خطاهای رایج</h2>
-
-    <h3>خطا: connection refused for database</h3>
-    <div class="alert alert-warn">
-      <div class="alert-icon">⚠️</div>
-      <div class="alert-content">
-        <pre style="background:transparent;border:none;padding:0;color:inherit;font-size:12px">django.db.utils.OperationalError: connection refused</pre>
-      </div>
-    </div>
-    <p><strong>علت:</strong> دیتابیس هنوز شروع به کار نکرده. <strong>راه حل:</strong> چند ثانیه صبر کنید و دوباره امتحان کنید:</p>
-<pre>docker compose ps  <span class="comment"># بررسی وضعیت db</span>
-docker compose logs db  <span class="comment"># دیدن لاگ دیتابیس</span>
-docker compose restart web  <span class="comment"># ری‌استارت web بعد از آماده شدن db</span></pre>
-
-    <h3>خطا: No module named 'xxx'</h3>
-<pre>docker compose build --no-cache  <span class="comment"># بازسازی ایمیج</span>
-docker compose up -d</pre>
-
-    <h3>خطا: 403 Forbidden در آپلود تصویر</h3>
-    <p>Application Password وردپرس درست تنظیم نشده. مراحل:</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <div class="step-content">
-          <div class="step-title">در داشبورد وردپرس</div>
-          <div class="step-desc">به Users → Your Profile بروید. پایین صفحه Application Passwords را پیدا کنید.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <div class="step-content">
-          <div class="step-title">ساخت رمز جدید</div>
-          <div class="step-desc">یک نام بدهید (مثلا: SaaS Platform) و Add New Application Password را بزنید. رمز تولید شده را کپی کنید.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">۳</div>
-        <div class="step-content">
-          <div class="step-title">وارد کردن در پنل ادمین</div>
-          <div class="step-desc">به Store مربوطه در ادمین بروید و wp_username (نام کاربری ادمین) و wp_app_password (رمز کپی شده) را وارد کنید.</div>
-        </div>
-      </div>
-    </div>
-
-    <h3>خطا: AI API does not respond</h3>
-    <p>بررسی کنید:</p>
-    <ul style="list-style:none;padding:0">
-      <li style="padding:5px 0;color:var(--text2);font-size:13px">• کلید API در فروشگاه (Store → openai_api_key) وارد شده؟</li>
-      <li style="padding:5px 0;color:var(--text2);font-size:13px">• اتصال اینترنت سرور به <code>api.gapgpt.app</code> برقرار است؟</li>
-      <li style="padding:5px 0;color:var(--text2);font-size:13px">• لاگ را بررسی کنید: <code>docker compose logs -f web</code></li>
-    </ul>
-
-    <h3>خطا: Migration already applied</h3>
-<pre><span class="comment"># دیدن وضعیت migration ها</span>
-docker compose exec web python manage.py showmigrations
-
-<span class="comment"># اعمال migration های جدید</span>
-docker compose exec web python manage.py migrate</pre>
-
-    <h3>فارسی در لاگ‌ها خوانا نیست</h3>
-<pre><span class="comment"># بررسی encoding</span>
-docker compose exec web python manage.py shell
->>> import sys; print(sys.stdout.encoding)</pre>
-  </section>
-
-  <!-- ════════════════════════════════════ SECTION 10 ═══ -->
-  <section id="faq">
-    <h2><span class="section-num">۱۰</span>سوالات متداول</h2>
-
-    <h3>چطور پلن جدید با Feature های مختلف بسازم؟</h3>
-    <p>در پنل ادمین: Core → Features → یک Feature جدید با code انگلیسی بسازید. سپس در Core → Plans → Plan جدید بسازید و Feature را به آن اضافه کنید. حالا اگر یک Store به این Plan وصل شود، AccessControlService.has_feature() برای آن Feature مقدار True برمی‌گرداند.</p>
-
-    <h3>چطور کاربر دوم برای یک فروشگاه بسازم؟</h3>
-    <p>در پنل ادمین یک User جدید بسازید. سپس یک UserProfile جدید بسازید که هم User و هم همان Store را نشان می‌دهد. نقش می‌تواند admin یا operator باشد.</p>
-
-    <h3>داده‌های دیتابیس کجا ذخیره می‌شوند؟</h3>
-    <p>در یک Docker Volume به نام <code>saas_data</code>. این Volume جدا از کانتینر است، پس حتی اگر <code>docker compose down</code> بزنید داده‌ها باقی می‌مانند. فقط با <code>docker compose down -v</code> حذف می‌شوند.</p>
-
-    <h3>چطور بکاپ از دیتابیس بگیرم؟</h3>
-<pre><span class="comment"># بکاپ</span>
-docker compose exec db pg_dump -U saas_user saas_db > backup.sql
-
-<span class="comment"># بازیابی</span>
-cat backup.sql | docker compose exec -T db psql -U saas_user -d saas_db</pre>
-
-    <h3>چطور کد را بدون ری‌استارت کامل بروزرسانی کنم؟</h3>
-<pre><span class="comment"># در حالت development (با volume mount)</span>
-<span class="comment"># کد را در host ویرایش کنید — Django development server خودکار reload می‌کند</span>
-
-<span class="comment"># در حالت production (Gunicorn)</span>
-docker compose restart web</pre>
-
-    <h3>چطور به پورت دیتابیس از خارج داکر وصل شوم؟</h3>
-    <p>دیتابیس روی پورت <code>54320</code> در host در دسترس است (نه ۵۴۳۲ که داخلی است). می‌توانید با ابزارهایی مثل DBeaver یا TablePlus وصل شوید:</p>
-<pre>Host: localhost
-Port: 54320
-Database: saas_db
-Username: saas_user
-Password: saas_password</pre>
 
     <div class="alert alert-success">
-      <div class="alert-icon">✅</div>
+      <div class="alert-icon">✓</div>
       <div class="alert-content">
-        <div class="alert-title">پروژه آماده است!</div>
-        با طی کردن تمام مراحل بالا، پلتفرم شما کاملاً آماده استفاده است. برای هر سوال اضافی لاگ‌ها را بررسی کنید: <code>docker compose logs -f</code>
+        <div class="alert-title">کاربران ویندوز و مک</div>
+        نیاز به اجرای دستورات بالا ندارید. کافیست نرم‌افزار <strong>Docker Desktop</strong> را از سایت رسمی دانلود و با کلیک روی Next نصب کنید.
       </div>
     </div>
+  </section>
+
+  <section id="project-setup">
+    <h2><span class="section-num">۵</span>راه‌اندازی پروژه و تنظیمات محیطی</h2>
+    
+    <h3 id="env-config">ساخت فایل .env</h3>
+    <p>پروژه برای اجرا به یک فایل متغیرهای محیطی به نام <code>.env</code> در مسیر اصلی (کنار فایل <code>docker-compose.yml</code>) نیاز دارد. یک فایل جدید بسازید و مقادیر زیر را در آن قرار دهید:</p>
+
+<pre><span class="comment"># --- تنظیمات پایه جنگو ---</span>
+DJANGO_SECRET_KEY=<span class="string">your-super-secret-key-change-it</span>
+DJANGO_DEBUG=<span class="string">True</span>  <span class="comment"># در سرور اصلی روی False قرار دهید</span>
+
+<span class="comment"># --- تنظیمات دیتابیس PostgreSQL ---</span>
+POSTGRES_DB=<span class="string">saas_db</span>
+POSTGRES_USER=<span class="string">saas_user</span>
+POSTGRES_PASSWORD=<span class="string">saas_secure_pass123</span>
+POSTGRES_HOST=<span class="string">db</span>
+POSTGRES_PORT=<span class="string">5432</span></pre>
+  </section>
+
+  <section id="first-run">
+    <h2><span class="section-num">۶</span>اجرای اول پروژه</h2>
+
+    <p>بعد از تنظیم فایل `.env`، وارد پوشه پروژه در ترمینال شوید و دستورات زیر را به ترتیب اجرا کنید:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">۱</div>
+        <div class="step-content">
+          <div class="step-title">بیلد و اجرای کانتینرها</div>
+          <div class="step-desc">این دستور داکر را استارت زده و ایمیج‌ها را در پس‌زمینه دانلود/بیلد می‌کند.</div>
+<pre>docker compose up -d --build</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">۲</div>
+        <div class="step-content">
+          <div class="step-title">اعمال تغییرات دیتابیس (Migrate)</div>
+          <div class="step-desc">ساختار جداول را در PostgreSQL ایجاد می‌کند.</div>
+<pre>docker compose exec web python manage.py migrate</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">۳</div>
+        <div class="step-content">
+          <div class="step-title">ساخت کاربر ارشد (Superuser)</div>
+          <div class="step-desc">برای دسترسی به پنل ادمین جنگو، یک اکانت ادمین بسازید.</div>
+<pre>docker compose exec web python manage.py createsuperuser</pre>
+        </div>
+      </div>
+    </div>
+    
+    <p>حالا مرورگر خود را باز کنید و به آدرس <code>http://localhost:8000</code> بروید. برای پنل ادمین از <code>http://localhost:8000/admin</code> استفاده کنید.</p>
+  </section>
+
+  <section id="production">
+    <h2><span class="section-num">۷</span>آماده‌سازی برای پروداکشن (سرور واقعی)</h2>
+    <p>وقتی قصد دارید پروژه را روی سرور عمومی دیپلوی کنید، باید تغییرات امنیتی زیر را در فایل <code>.env</code> و تنظیمات سرور اعمال کنید:</p>
+
+    <ul>
+      <li>متغیر <code>DJANGO_DEBUG</code> را روی <strong>False</strong> قرار دهید. این کار از نمایش خطاهای حساس جلوگیری می‌کند.</li>
+      <li>متغیر <code>ALLOWED_HOSTS</code> را با دامنه سایت خود (مثلاً <code>saas.example.com</code>) تنظیم کنید.</li>
+      <li>رمز عبور قدرتمندی برای <code>POSTGRES_PASSWORD</code> انتخاب کنید.</li>
+      <li>بهتر است از Nginx به عنوان یک Reverse Proxy استفاده کنید تا درخواست‌های پورت 80 و 443 (HTTPS) را به پورت 8000 داکر منتقل کند.</li>
+    </ul>
+  </section>
+
+  <section id="troubleshoot">
+    <h2 id="faq"><span class="section-num">۸</span>رفع خطاها و سوالات متداول</h2>
+
+    <h4>❓ کانتینرها استارت نمی‌شوند یا ارور Database Connection می‌دهند</h4>
+    <p>گاهی اوقات کانتینر اپلیکیشن جنگو زودتر از بالا آمدن کامل دیتابیس اجرا می‌شود. ابتدا لاگ‌ها را با دستور زیر بررسی کنید:</p>
+<pre>docker compose logs -f web</pre>
+    <p>اگر مشکل از دیتابیس بود، کافیست یک بار وب‌سرور را ری‌استارت کنید: <code>docker compose restart web</code></p>
+
+    <h4>❓ چطور فایل‌های استاتیک در پروداکشن لود نمی‌شوند؟</h4>
+    <p>هنگامی که <code>DEBUG=False</code> است، جنگو فایل‌های استاتیک را مستقیم سرو نمی‌کند. باید دستور زیر را داخل کانتینر اجرا کنید تا فایل‌ها جمع‌آوری شوند (در این معماری داکر، معمولاً WhiteNoise یا Nginx این کار را هندل می‌کند):</p>
+<pre>docker compose exec web python manage.py collectstatic --noinput</pre>
+
+    <h4>❓ چگونه یک ایمیج ووکامرس آپلود نمی‌شود؟</h4>
+    <p>بررسی کنید که در تنظیمات وردپرس مقصد (ووکامرس)، کاربر API دسترسی <strong>Read/Write</strong> داشته باشد و آدرس سایت در دیتابیس (جدول Store) بدون خط اسلش آخر (<code>/</code>) وارد شده باشد.</p>
+
   </section>
 
 </main>
 </div>
 
-<script>
-document.querySelectorAll('.sidebar-link').forEach(link => {
-  link.addEventListener('click', function() {
-    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-      });
-    }
-  });
-}, { rootMargin: '-20% 0px -70% 0px' });
-
-document.querySelectorAll('section[id]').forEach(sec => observer.observe(sec));
-</script>
 </body>
 </html>
