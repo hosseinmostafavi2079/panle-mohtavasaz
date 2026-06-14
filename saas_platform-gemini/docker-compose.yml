@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: saas_db
+      POSTGRES_USER: saas_user
+      POSTGRES_PASSWORD: saas_password
+    ports:
+      - "127.0.0.1:54320:5432"
+    volumes:
+      - saas_data:/var/lib/postgresql/data
+ 
+  web:
+    build: .
+    restart: always
+    command: sh -c "python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8000"  # باز کردن پورت برای اتصال IIS
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+    depends_on:
+      - db
+    extra_hosts:
+      - "sobhanrayaneh.com:89.235.116.213"
+      - "www.sobhanrayaneh.com:89.235.116.213"
+      - "idpart.ir:89.235.116.213"
+      - "www.idpart.ir:89.235.116.213"
+      - "id724.com:89.235.116.213"
+      - "www.id724.com:89.235.116.213"
+      - "sahandrayaneh.com:89.235.116.213"
+      - "www.sahandrayaneh.com:89.235.116.213"
+
+
+volumes:
+  saas_data:
