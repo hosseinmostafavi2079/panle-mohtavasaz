@@ -338,15 +338,5 @@ docker compose exec web python manage.py collectstatic --noinput
 
 with open("README.md", "w", encoding="utf-8") as f:
 f.write(content)
-
 print("File README.md created successfully.")
 
-```
-ژاکت (Artifact) مستندات شما به صورت فایل Markdown (MD) با حفظ تمام ساختار و استایل‌های استاندارد گیت‌هاب ایجاد شد.
-
-فایل `README.md` شما آماده است:
-[file-tag: code-generated-file-0-1781433972066252085]
-
-این فایل را می‌توانید مستقیماً به عنوان فایل اصلی توضیحات پروژه در گیت‌هاب/گیت‌لب قرار دهید. تمام ساختارها، بلوک‌های کد پایتون و لینوکس، و جداول با ظاهری بسیار تمیز در آن رندر خواهند شد.
-
-```
